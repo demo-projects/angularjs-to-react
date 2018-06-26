@@ -17,11 +17,9 @@
   </head>
   <body>
 
-    <app></app>
-
-    <!--<main>-->
-      <!--<ui-view></ui-view>-->
-    <!--</main>-->
+    <button ng-click="">click</button>
+    <input type="checkbox" ng-model="flag" ng-init="flag = true">
+    <app ng-if="flag"></app>
 
   </body>
 </html>
