@@ -29,6 +29,4 @@ angular.module('AngularApp', [
 ]);
 
 angular.element(document).ready(() =>
-  angular.bootstrap(document, ['AngularApp'], {
-    strictDi: true
-  }));
+  angular.bootstrap(document, ['AngularApp']));
