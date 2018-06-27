@@ -1,18 +1,33 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
-export class App extends React.Component {
-  render(){
-    return (
-      <div>
-        <h1>App Component</h1>
-        <h2>Just for test</h2>
-      </div>
-    )
-  }
-}
+const Home = () => <h1>Home Component</h1>;
 
-export class Link extends React.Component {
-  render() {
-    return <a href={this.props.url}>click</a>
-  }
-}
+const Me = () => "JustMe Here!";
+
+const About = () => (
+  <div>
+    <h1>About Component</h1>
+    <Link to="/about/me">me</Link>
+    <Route path="/about/me" component={Me}/>
+  </div>
+
+);
+
+
+const App = () => (
+  <Router>
+    <Fragment>
+
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about/nir">About</Link>
+      </nav>
+
+      <Route exact path="/" component={Home}/>
+      <Route path="/about/:name" component={About}/>
+    </Fragment>
+  </Router>
+);
+
+export default App;
