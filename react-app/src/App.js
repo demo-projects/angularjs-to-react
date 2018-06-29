@@ -1,28 +1,27 @@
-import React from 'react';
-import {Child} from "./Child";
+import React, {createRef} from 'react';
+import * as Vanilla from 'vanilla-tilt';
+
 import './App.css';
 
 export class App extends React.Component {
 
-  state = { flag: true, counter: 1 };
-  input = React.createRef();
-
-  toggleChild(){
-    this.setState({ flag: !this.state.flag })
-  }
+  box = createRef();
 
   componentDidMount(){
-    this.state = { counter: 2 }
-    // this.input.current.focus();
+    Vanilla.init(this.box.current, {
+      max: 25,
+      speed: 400
+    });
   }
 
   render(){
     return (
-      <div>
-        <h1>App Component</h1>
-        <input type="checkbox" onChange={() => this.toggleChild()}/>
-        <input type="text" ref={this.input}/>
-        { this.state.flag && <Child counter={this.state.counter}/> }
+      <div ref={this.box}>
+        <div className="box">
+          <div className="innerBox">
+            some text
+          </div>
+        </div>
       </div>
     );
   }

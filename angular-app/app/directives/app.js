@@ -1,29 +1,35 @@
+
+
 // root element
 export function app() {
   return {
-    scope: {},
-    compile: function () {
-      console.log('compile phase');
-      return {
-        pre: function () {
-          console.log('pre link');
-        },
-        post: function () {
-          console.log('post link');
-        },
-      }
+    controller: function (Users) {
+      Users.getUsers();
     },
-    controller: class AppController  {
-
-      constructor($scope) {
-        console.log('controller init');
-        $scope.list = ['Nir', 'Jow', 'Boris', 'Jeff'];
-        $scope.$on('$destroy', () => console.log('scope destroyed'));
-        $scope.$watch( () => console.log('DIGEST') )
-      }
-    },
+    controllerAs: 'App',
     template: `
-      <h1 ng-repeat="name in list">{{name}}</h1>  
+      <h1>Container </h1>
+      <pre>{{ App.users }}</pre>      
+      <child />  
     `
   };
 }
+
+export function child() {
+  return {
+    controller: function(Store) {
+      this.users = Store.getState('users');
+    },
+    template: `<h2>Child component</h2>`
+  }
+}
+
+
+// export const child = ({title, action}) => (
+//   <div>
+//     <h2>{title}</h2>
+//     <button onClick={action}>click</button>
+//   </div>
+// )
+//
+//
