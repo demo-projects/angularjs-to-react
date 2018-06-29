@@ -1,33 +1,36 @@
 import React, {Fragment} from 'react';
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
-const Home = () => <h1>Home Component</h1>;
+class App extends React.Component {
 
-const Me = () => "JustMe Here!";
+  state = { name: 'Nir' };
 
-const About = () => (
-  <div>
-    <h1>About Component</h1>
-    <Link to="/about/me">me</Link>
-    <Route path="/about/me" component={Me}/>
-  </div>
+  updateForm = ({ currentTarget }) => {
+    this.setState({ name:currentTarget.value })
+  };
 
-);
+  onSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+  };
+
+  render(){
+    return (
+      <Fragment>
+        <form onSubmit={this.onSubmit}>
+        <input type="text" onChange={this.updateForm} value={this.state.name}/>
+         <button>send</button>
+        </form>
+
+        <pre>{ JSON.stringify(this.state, 2, 2)}</pre>
+
+      </Fragment>
 
 
-const App = () => (
-  <Router>
-    <Fragment>
+    )
+  }
 
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about/nir">About</Link>
-      </nav>
 
-      <Route exact path="/" component={Home}/>
-      <Route path="/about/:name" component={About}/>
-    </Fragment>
-  </Router>
-);
+}
+
 
 export default App;
